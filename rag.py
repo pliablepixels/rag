@@ -11,19 +11,7 @@ handler = logging.StreamHandler()
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-
-
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, PromptTemplate
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-#model_name="BAAI/bge-small-en-v1.5"
-model_name="hkunlp/instructor-xl"
-embed_model = HuggingFaceEmbedding(model_name=model_name)
-#embed_model = HuggingFaceEmbedding(model_name="Salesforce/SFR-Embedding-Mistral")
-
-
-
 my_llm = MyLLM()
-#Settings.llm = my_llm
 
 my_query = MyQueryProcessor(streaming=False, response_mode='refine')
 my_query.load_or_create(path='./data', persist_dir='db')
@@ -39,6 +27,7 @@ while True:
     ''' for token in response:
         print(token.delta, end="")
     #streaming_response.print_response_stream()'''
+    print ('\nFINAL ANSWER:\n')
     print(response)
     print ('\n---------------------------\n')
 print ('\n\nGoodbye!\n\n')
